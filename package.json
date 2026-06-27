@@ -1,0 +1,44 @@
+{
+  "name": "@shieldly/cli",
+  "version": "1.0.4",
+  "description": "AI-Powered Security Analysis for AWS — official CLI",
+  "license": "MIT",
+  "homepage": "https://www.shieldly.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shieldly-io/cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shieldly-io/cli/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "bin": {
+    "shieldly": "dist/cli.cjs"
+  },
+  "files": [
+    "dist/cli.cjs"
+  ],
+  "keywords": [
+    "aws",
+    "iam",
+    "security",
+    "cloudformation",
+    "ai",
+    "shieldly",
+    "cli"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "build:dev": "node build.js --dev",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
