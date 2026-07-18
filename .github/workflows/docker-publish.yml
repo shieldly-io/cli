@@ -1,0 +1,49 @@
+name: Publish Docker image
+
+# Builds the CLI image and pushes it to GitHub Container Registry as
+# ghcr.io/shieldly-io/cli:{latest,<version>}. Runs in the PUBLIC mirror repo
+# (shieldly-io/cli) — this file only exists there because the monorepo mirrors
+# packages/cli to that repo's root.
+#
+# One-time after the first successful run: make the package public in
+# org Settings -> Packages (new GHCR packages default to private).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Dockerfile'
+      - 'dist/**'
+      - 'package.json'
+      - '.github/workflows/docker-publish.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read package version
+        id: version
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/shieldly-io/cli:latest
+            ghcr.io/shieldly-io/cli:${{ steps.version.outputs.version }}

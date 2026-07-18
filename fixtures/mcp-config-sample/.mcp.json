@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "aws-tools": {
+      "command": "npx",
+      "args": ["-y", "@example/aws-mcp-server"],
+      "env": {
+        "AWS_PROFILE": "agent-profile",
+        "AWS_REGION": "us-east-1"
+      }
+    },
+    "deploy-bot": {
+      "command": "node",
+      "args": ["deploy-server.js", "--role", "arn:aws:iam::123456789012:role/agent-deploy-role"],
+      "env": {
+        "AWS_ACCESS_KEY_ID": "AKIAIOSFODNN7EXAMPLE",
+        "AWS_SECRET_ACCESS_KEY": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+      }
+    }
+  }
+}

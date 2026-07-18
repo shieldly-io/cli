@@ -1,0 +1,56 @@
+{
+  "name": "@shieldly/cli",
+  "version": "1.3.1",
+  "description": "AI-Powered Security Analysis for AWS — official CLI",
+  "license": "MIT",
+  "homepage": "https://www.shieldly.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shieldly-io/cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shieldly-io/cli/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "bin": {
+    "shieldly": "dist/cli.cjs"
+  },
+  "files": [
+    "dist/cli.cjs"
+  ],
+  "keywords": [
+    "aws",
+    "iam",
+    "security",
+    "cloudformation",
+    "ai",
+    "shieldly",
+    "cli",
+    "ai-agent-security",
+    "mcp",
+    "model-context-protocol",
+    "agent-security",
+    "least-privilege",
+    "blast-radius",
+    "iam-policy",
+    "sarif"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "build:dev": "node build.js --dev",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-iam": "^3.821.0",
+    "@aws-sdk/client-sts": "^3.821.0",
+    "@aws-sdk/credential-providers": "^3.821.0",
+    "esbuild": "^0.25.0",
+    "yaml": "^2.9.0"
+  }
+}

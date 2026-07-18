@@ -1,0 +1,35 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AgentS3FullAccess",
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "AgentDatabaseAdmin",
+      "Effect": "Allow",
+      "Action": ["rds:DeleteDBInstance", "rds:ModifyDBInstance", "dynamodb:*"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AgentEscalation",
+      "Effect": "Allow",
+      "Action": ["iam:PassRole", "iam:CreateAccessKey", "iam:PutRolePolicy", "sts:AssumeRole"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AgentSecrets",
+      "Effect": "Allow",
+      "Action": ["secretsmanager:GetSecretValue", "ssm:GetParametersByPath"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AgentCompute",
+      "Effect": "Allow",
+      "Action": ["ec2:RunInstances", "sagemaker:CreateTrainingJob", "bedrock:InvokeModel"],
+      "Resource": "*"
+    }
+  ]
+}

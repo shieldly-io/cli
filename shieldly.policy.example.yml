@@ -1,0 +1,25 @@
+# Shieldly agent permission budget — the maximum blast radius this repo allows
+# its AI agents' AWS credentials to have. Enforced in CI:
+#
+#   shieldly agent-scan --policy-file agent-policy.json --budget shieldly.policy.yml
+#
+# Non-zero exit when the scan exceeds the budget. Copy this file to
+# shieldly.policy.yml and tune to taste.
+
+version: 1
+
+# Highest finding severity allowed to pass. Anything more severe fails the run.
+# One of: CRITICAL | HIGH | MEDIUM | LOW | none
+max-severity: MEDIUM
+
+# Categories that always fail regardless of severity. Categories:
+# DESTRUCTIVE | ESCALATION | DATA_ACCESS | COST_RISK | WILDCARD | NO_GUARDRAILS
+deny-categories:
+  - ESCALATION
+
+# Rule IDs to suppress entirely (accepted false positives). Run a scan to see IDs.
+ignore-rules: []
+  # - BR-DATA-S3
+
+# Optional hard cap on total (non-ignored) findings.
+# max-findings: 50
